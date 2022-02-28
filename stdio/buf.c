@@ -86,29 +86,31 @@ buffer_size(FILE *fp)
 
 #elif defined(_IONBF)
 
+/*
 #ifdef _LP64
 #define _flag __pad[4]
 #define _ptr __pad[1]
 #define _base __pad[2]
 #endif
+*/
 
 int
 is_unbuffered(FILE *fp)
 {
-	return(fp->_flag & _IONBF);
+	return(fp->_flags & _IONBF);
 }
 
 int
 is_linebuffered(FILE *fp)
 {
-	return(fp->_flag & _IOLBF);
+	return(fp->_flags & _IOLBF);
 }
 
 int
 buffer_size(FILE *fp)
 {
 #ifdef _LP64
-	return(fp->_base - fp->_ptr);
+	return(fp->_IO_buf_end - fp->_IO_buf_base);
 #else
 	return(BUFSIZ);	/* just a guess */
 #endif
