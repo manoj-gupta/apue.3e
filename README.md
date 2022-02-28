@@ -17,3 +17,11 @@ Install the package using
 ```
 sudo apt-get install libbsd-dev
 ```
+
+### devrdev.c:(.text+0xc5): undefined reference to `minor’
+
+In `devrdev.c` include `sys/sysmacros.h` headerfile
+
+```
+#include <sys/sysmacros.h>
+```
