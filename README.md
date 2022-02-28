@@ -105,3 +105,35 @@ index e3b0465..6608bb9 100644
         if ((err = pthread_mutexattr_init(&attr)) != 0)
 ```
 
+## Compiling and running own programs
+
+The uncompressed file contains directories with the names of the chapters having all the programs of that capture and two others named `include` and `lib`.
+
+The `include` directory contains the header file `apue.h`. The `lib` directory has the source code of the implementations defined in header file.
+
+Lets assume the uncompressed file is located at: `BASE/`, In my case it is `/home/manoj/apue.3e`
+
+Once you uncompress the source code, go in the directory and run make:
+
+$ cd BASE
+$ make
+
+`make` will compile all the programs in all the chapters. Also, it will create the library that will contain the implementations of the functions in apue.h.
+
+To compile an example program that you write from the book, run this GCC command (assuming your program's name is myls.c which is the first in the book):
+
+```
+gcc -o test test.c -I BASE/include/ -L BASE/lib/ -lapue
+```
+
+-I tells gcc which directory to look for the include file. -L tells it the location of the library directory, and -lapue, tells the name of the library file to look for in that directory. Such that -LXXX means to look for a file in the library directory with the name: libXXX.a or libXXX.so.
+
+In my case, created a directory myprograms and created ls1.c in it. To compile and run
+
+```
+ubuntu:~/apue.3e$ gcc -o myls myprograms/ls1.c -I include/ -L lib/ -lapue
+ubuntu:~/apue.3e$ ./myls myprograms
+ls1.c
+.
+..
+```
