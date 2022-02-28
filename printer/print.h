@@ -23,7 +23,7 @@
 #define LPNAME			"lp"
 #endif
 
-#define FILENMSZ        64
+#define FILENMSZ        512
 #define FILEPERM        (S_IRUSR|S_IWUSR)
 
 #define USERNM_MAX      64

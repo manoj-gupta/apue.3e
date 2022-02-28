@@ -97,7 +97,7 @@ retry(void *arg)
 int
 main(void)
 {
-	int				err, condition, arg;
+	int				err, condition=0, arg=0;
 	struct timespec	when;
 
 	if ((err = pthread_mutexattr_init(&attr)) != 0)

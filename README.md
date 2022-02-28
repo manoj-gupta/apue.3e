@@ -71,3 +71,37 @@ index 9555e3d..a9c74d9 100644
         return(BUFSIZ); /* just a guess */
  #endif
 ```
+
+### timeout.c:119:5: warning: ‘condition’ may be used uninitialized in this function
+
+Apply following patch for `threadctl/timeout.c`
+
+```
+diff --git a/printer/print.h b/printer/print.h
+index bb6a3d8..9f4a9b6 100644
+--- a/printer/print.h
++++ b/printer/print.h
+@@ -23,7 +23,7 @@
+ #define LPNAME                 "lp"
+ #endif
+
+-#define FILENMSZ        64
++#define FILENMSZ        512
+ #define FILEPERM        (S_IRUSR|S_IWUSR)
+
+ #define USERNM_MAX      64
+diff --git a/threadctl/timeout.c b/threadctl/timeout.c
+index e3b0465..6608bb9 100644
+--- a/threadctl/timeout.c
++++ b/threadctl/timeout.c
+@@ -97,7 +97,7 @@ retry(void *arg)
+ int
+ main(void)
+ {
+-       int                             err, condition, arg;
++       int                             err, condition=0, arg=0;
+        struct timespec when;
+
+        if ((err = pthread_mutexattr_init(&attr)) != 0)
+```
+
